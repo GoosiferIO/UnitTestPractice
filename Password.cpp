@@ -19,11 +19,43 @@ int Password::count_leading_characters(string phrase){
   return repetition;
 }
 
+/* Compares two characters if they are ascending */
+bool Password::compare_characters(char first, char second){
+  return first < second;
+}
 
-/*
-  receives a string and returns whether it has both at least one upper-case
-  letter and at least one lower-case letter
-*/
+/* Checks if password is in ascending order */
+bool Password::is_ascending(string pass){
+  if (pass.length() == 0){
+    return true;
+  }
+  else if (pass.length() == 1){
+    return true;
+  }
+  else{
+    for (int i = 0; i < pass.length()-1; i++){
+      if (compare_characters(pass[i], pass[i+1]) == false){
+        return false;
+      }
+
+    }
+  }
+    return true;
+}
+
+/* Checks if the string has a mixed case composition */
 bool Password::has_mixed_case(string pass){
-  return false;
+  bool hasUpper = false;
+  bool hasLower = false;
+  for (int i = 0; i < pass.length(); i++){
+    if (isupper(pass[i])){
+      hasUpper = true;
+    }
+    if (islower(pass[i])){
+      hasLower = true;
+    }
+  }
+
+  // we want both to be true
+  return hasUpper && hasLower;
 }
